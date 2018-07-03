@@ -1,0 +1,99 @@
+{
+  "id": "4e55b762-84f0-43ca-81e9-f666fe31f1e0",
+  "values": [
+    {
+      "key": "qa4abcp",
+      "value": "862325",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "4mycar",
+      "value": "13194",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "ABCPmanWithG3C",
+      "value": "3915084",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "ABCPmanWithG1C",
+      "value": "3913998",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "ABCPmanWithoutG",
+      "value": "3906636",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "ABCPmanAddedCars",
+      "value": "3792480",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "incorrectCarId",
+      "value": "777777777",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "4mcManWithG",
+      "value": "1254766",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "4mcManWithoutG",
+      "value": "4125409",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "modificationId",
+      "value": "5714",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "vin",
+      "value": "JTNBV58E20J046667",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "mileage",
+      "value": "10100",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "comment",
+      "value": "test",
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "firstPartForDelete",
+      "value": 4174,
+      "enabled": true,
+      "type": "text"
+    },
+    {
+      "key": "carForDelete",
+      "value": 310568,
+      "enabled": true,
+      "type": "text"
+    }
+  ],
+  "name": "Garage-Api-Go Globals",
+  "_postman_variable_scope": "globals",
+  "_postman_exported_at": "2018-06-07T12:48:00.083Z",
+  "_postman_exported_using": "Postman/6.1.3"
+}

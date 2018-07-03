@@ -1,0 +1,3274 @@
+{
+	"info": {
+		"_postman_id": "da0ebaeb-8174-4a2b-9935-c3bade7eb75a",
+		"name": "search/articles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "id15331",
+			"description": "",
+			"item": [
+				{
+					"name": "UseOnlineStocks TRUE",
+					"description": "",
+					"item": [
+						{
+							"name": "exclude UEOS",
+							"description": "Параметр useExternalOnlineStocks (UEOS) не учавствует в запросе, либо отправляется с флагом true",
+							"item": [
+								{
+									"name": "admin id15331",
+									"description": "",
+									"item": [
+										{
+											"name": "Отправка на внутр. онлайн поставщика",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "0a920c59-939a-440e-a337-0ca578f19f89",
+														"type": "text/javascript",
+														"exec": [
+															"var price = pm.globals.get(\"internal_vmolch_id15331\");",
+															"",
+															"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 1 артикул\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(1);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE&useOnlineStocks=1",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "api@id15331"
+														},
+														{
+															"key": "userpsw",
+															"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+														},
+														{
+															"key": "number",
+															"value": "CAM711TEST"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "1"
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+											},
+											"response": []
+										},
+										{
+											"name": "Отправка на внешн.+прайс",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "30e53c43-2dda-435e-906d-d796ba2384e0",
+														"type": "text/javascript",
+														"exec": [
+															"var favorit = pm.globals.get(\"extern_favorit_id15331\");",
+															"var price = pm.globals.get(\"price_id15331\");",
+															"",
+															"pm.test(\"Есть ответ от внешнего поставщика Фаворит\", function () {",
+															"    var jsonData = pm.response.json();",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == favorit) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 2 осн. артикула и три аналога\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(5);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE&useOnlineStocks=1",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "api@id15331"
+														},
+														{
+															"key": "userpsw",
+															"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+														},
+														{
+															"key": "number",
+															"value": "CAM711"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "1"
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "client 4660550",
+									"description": "Опция api/allow_send_request_online_distributors включена",
+									"item": [
+										{
+											"name": "Отправка на внутр. онлайн поставщика Client",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "0a920c59-939a-440e-a337-0ca578f19f89",
+														"type": "text/javascript",
+														"exec": [
+															"var price = pm.globals.get(\"internal_vmolch_id15331\");",
+															"",
+															"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 1 артикул\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(1);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE&useOnlineStocks=1",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "evreev@noda.pro"
+														},
+														{
+															"key": "userpsw",
+															"value": "81dc9bdb52d04dc20036dbd8313ed055"
+														},
+														{
+															"key": "number",
+															"value": "CAM711TEST"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "1"
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+											},
+											"response": []
+										},
+										{
+											"name": "Отправка на внешн.+прайс Copy",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "30e53c43-2dda-435e-906d-d796ba2384e0",
+														"type": "text/javascript",
+														"exec": [
+															"var favorit = pm.globals.get(\"extern_favorit_id15331\");",
+															"var price = pm.globals.get(\"price_id15331\");",
+															"",
+															"pm.test(\"Есть ответ от внешнего поставщика Фаворит\", function () {",
+															"    var jsonData = pm.response.json();",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == favorit) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 2 осн. артикула и три аналога\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(5);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE&useOnlineStocks=1",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "evreev@noda.pro"
+														},
+														{
+															"key": "userpsw",
+															"value": "81dc9bdb52d04dc20036dbd8313ed055"
+														},
+														{
+															"key": "number",
+															"value": "CAM711"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "1"
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "4d9728c0-fa94-4631-89ad-321ce64c6c6b",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "976c2c51-6a54-460c-83b6-7794fb5be8eb",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "cd413ef1-2ef4-42bd-b2c1-7d68885d0889",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "471cc9a5-5285-4b45-8a3b-fe67e2b2baee",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "include UEOS",
+							"description": "Параметр useExternalOnlineStocks (useExternalOnlineStocks) включен в запросы",
+							"item": [
+								{
+									"name": "admin id15331",
+									"description": "",
+									"item": [
+										{
+											"name": "true",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "30e53c43-2dda-435e-906d-d796ba2384e0",
+																"type": "text/javascript",
+																"exec": [
+																	"var favorit = pm.globals.get(\"extern_favorit_id15331\");",
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внешнего поставщика Фаворит\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == favorit) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 2 осн. артикула и три аналога\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(5);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE&useOnlineStocks=1&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "1"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "c4002243-8ca7-4a3d-b9b6-ca0c1162ccd6",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"internal_vmolch_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 1 артикул\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE&useOnlineStocks=1&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "1"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										},
+										{
+											"name": "false",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс UEOS false",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "e4bd3f99-9a4a-4b01-b28c-b4fdc5dbb75c",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит только 1 предложение: из прайса\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE&useOnlineStocks=1&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "1"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика UEOS true",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "93bb0ecd-d259-400a-964d-903ec0b82535",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"internal_vmolch_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 1 артикул\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE&useOnlineStocks=1&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "1"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "client 4660550",
+									"description": "Опция api/allow_send_request_online_distributors включена",
+									"item": [
+										{
+											"name": "true",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "30e53c43-2dda-435e-906d-d796ba2384e0",
+																"type": "text/javascript",
+																"exec": [
+																	"var favorit = pm.globals.get(\"extern_favorit_id15331\");",
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внешнего поставщика Фаворит\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == favorit) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 2 осн. артикула и три аналога\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(5);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE&useOnlineStocks=1&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "1"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "c4002243-8ca7-4a3d-b9b6-ca0c1162ccd6",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"internal_vmolch_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 1 артикул\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE&useOnlineStocks=1&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "1"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										},
+										{
+											"name": "false",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс UEOS false",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "444f049b-bcbf-4fb8-9089-9d1b4dde24b9",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 1 артикул\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE&useOnlineStocks=1&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "1"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика UEOS true",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "93bb0ecd-d259-400a-964d-903ec0b82535",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"internal_vmolch_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 1 артикул\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE&useOnlineStocks=1&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "1"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "47d49e25-0ab6-42d5-8019-bb9f8c8f3d03",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a0697431-1452-4566-a576-38568e93457f",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "UseOnlineStocks False",
+					"description": "",
+					"item": [
+						{
+							"name": "exclude UEOS",
+							"description": "Параметр useExternalOnlineStocks (UEOS) не учавствует в запросе, либо отправляется с флагом true",
+							"item": [
+								{
+									"name": "admin id15331",
+									"description": "",
+									"item": [
+										{
+											"name": "Отправка на внутр. онлайн поставщика",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "4387cf6d-ef2a-47c7-bc24-cf9c22c44a14",
+														"type": "text/javascript",
+														"exec": [
+															"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+															"    pm.response.to.have.status(404);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE&useOnlineStocks=0",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "api@id15331"
+														},
+														{
+															"key": "userpsw",
+															"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+														},
+														{
+															"key": "number",
+															"value": "CAM711TEST"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "0"
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+											},
+											"response": []
+										},
+										{
+											"name": "Отправка на внешн.+прайс",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "a1beb565-f0cb-4f3c-87cd-697d4273b68b",
+														"type": "text/javascript",
+														"exec": [
+															"var price = pm.globals.get(\"price_id15331\");",
+															"",
+															"",
+															"",
+															"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 1 артикул из прайса\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(1);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE&useOnlineStocks=0",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "api@id15331"
+														},
+														{
+															"key": "userpsw",
+															"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+														},
+														{
+															"key": "number",
+															"value": "CAM711"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "0"
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога, т.к. добавили условие.\nЕсли это админ апи, то всегда устанавливать true (будут учитываться внешние склады тоже) вне зависимости от опции и параметра."
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "client 4660550",
+									"description": "Опция api/allow_send_request_online_distributors включена",
+									"item": [
+										{
+											"name": "Отправка на внутр. онлайн поставщика Client",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "0a920c59-939a-440e-a337-0ca578f19f89",
+														"type": "text/javascript",
+														"exec": [
+															"var price = pm.globals.get(\"internal_vmolch_id15331\");",
+															"",
+															"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 1 артикул\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(1);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE&useOnlineStocks=true",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "evreev@noda.pro"
+														},
+														{
+															"key": "userpsw",
+															"value": "81dc9bdb52d04dc20036dbd8313ed055"
+														},
+														{
+															"key": "number",
+															"value": "CAM711TEST"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "true"
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+											},
+											"response": []
+										},
+										{
+											"name": "Отправка на внешн.+прайс Copy",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "30e53c43-2dda-435e-906d-d796ba2384e0",
+														"type": "text/javascript",
+														"exec": [
+															"var favorit = pm.globals.get(\"extern_favorit_id15331\");",
+															"var price = pm.globals.get(\"price_id15331\");",
+															"",
+															"pm.test(\"Есть ответ от внешнего поставщика Фаворит\", function () {",
+															"    var jsonData = pm.response.json();",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == favorit) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 2 осн. артикула и три аналога\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(5);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE&useOnlineStocks=true",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "evreev@noda.pro"
+														},
+														{
+															"key": "userpsw",
+															"value": "81dc9bdb52d04dc20036dbd8313ed055"
+														},
+														{
+															"key": "number",
+															"value": "CAM711"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "true"
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "4d9728c0-fa94-4631-89ad-321ce64c6c6b",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "976c2c51-6a54-460c-83b6-7794fb5be8eb",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "cd413ef1-2ef4-42bd-b2c1-7d68885d0889",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "471cc9a5-5285-4b45-8a3b-fe67e2b2baee",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "include UEOS",
+							"description": "Параметр useExternalOnlineStocks (useExternalOnlineStocks) включен в запросы",
+							"item": [
+								{
+									"name": "admin id15331",
+									"description": "",
+									"item": [
+										{
+											"name": "true",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "97518931-4228-4f82-a4f0-663c7f9fe0fb",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ только 1 предложение от прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE&useOnlineStocks=0&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "d1fdffe7-9ecc-431c-883a-4fae119eb40e",
+																"type": "text/javascript",
+																"exec": [
+																	"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+																	"    pm.response.to.have.status(404);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE&useOnlineStocks=0&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										},
+										{
+											"name": "false",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс UEOS false",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "e4bd3f99-9a4a-4b01-b28c-b4fdc5dbb75c",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит только 1 предложение: из прайса\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE&useOnlineStocks=0&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика UEOS true",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "41057d6b-152d-436d-ba49-4ec331562367",
+																"type": "text/javascript",
+																"exec": [
+																	"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+																	"    pm.response.to.have.status(404);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE&useOnlineStocks=0&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "client 4660550",
+									"description": "Опция api/allow_send_request_online_distributors включена",
+									"item": [
+										{
+											"name": "true",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "f830f816-2b9a-4276-a0af-f76d0031fca2",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ только 1 предложение от прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE&useOnlineStocks=0&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "5fb9fcb4-d489-4c02-ac9d-8d966299dbc6",
+																"type": "text/javascript",
+																"exec": [
+																	"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+																	"    pm.response.to.have.status(404);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE&useOnlineStocks=0&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										},
+										{
+											"name": "false",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс UEOS false",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "444f049b-bcbf-4fb8-9089-9d1b4dde24b9",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 1 артикул\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE&useOnlineStocks=0&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика UEOS true",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "4815e294-f67d-4adf-a295-97dd779f6327",
+																"type": "text/javascript",
+																"exec": [
+																	"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+																	"    pm.response.to.have.status(404);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE&useOnlineStocks=0&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "47d49e25-0ab6-42d5-8019-bb9f8c8f3d03",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a0697431-1452-4566-a576-38568e93457f",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "59227260-e765-4c51-ac65-4acdf68b85ff",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "628df747-cb3b-4745-9caf-2cfb9a738b0b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "UseOnlineStocks NONE",
+					"description": "",
+					"item": [
+						{
+							"name": "exclude UEOS",
+							"description": "Параметр useExternalOnlineStocks (UEOS) не учавствует в запросе, либо отправляется с флагом true",
+							"item": [
+								{
+									"name": "admin id15331",
+									"description": "",
+									"item": [
+										{
+											"name": "Отправка на внутр. онлайн поставщика",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "4387cf6d-ef2a-47c7-bc24-cf9c22c44a14",
+														"type": "text/javascript",
+														"exec": [
+															"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+															"    pm.response.to.have.status(404);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "api@id15331"
+														},
+														{
+															"key": "userpsw",
+															"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+														},
+														{
+															"key": "number",
+															"value": "CAM711TEST"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "0",
+															"disabled": true
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+											},
+											"response": []
+										},
+										{
+											"name": "Отправка на внешн.+прайс",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "a1beb565-f0cb-4f3c-87cd-697d4273b68b",
+														"type": "text/javascript",
+														"exec": [
+															"var price = pm.globals.get(\"price_id15331\");",
+															"",
+															"",
+															"",
+															"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 1 артикул из прайса\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(1);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "api@id15331"
+														},
+														{
+															"key": "userpsw",
+															"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+														},
+														{
+															"key": "number",
+															"value": "CAM711"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "0",
+															"disabled": true
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога, т.к. добавили условие.\nЕсли это админ апи, то всегда устанавливать true (будут учитываться внешние склады тоже) вне зависимости от опции и параметра."
+											},
+											"response": []
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "client 4660550",
+									"description": "Опция api/allow_send_request_online_distributors включена",
+									"item": [
+										{
+											"name": "Отправка на внутр. онлайн поставщика Client",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "0a920c59-939a-440e-a337-0ca578f19f89",
+														"type": "text/javascript",
+														"exec": [
+															"var price = pm.globals.get(\"internal_vmolch_id15331\");",
+															"",
+															"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 1 артикул\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(1);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "evreev@noda.pro"
+														},
+														{
+															"key": "userpsw",
+															"value": "81dc9bdb52d04dc20036dbd8313ed055"
+														},
+														{
+															"key": "number",
+															"value": "CAM711TEST"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "true",
+															"disabled": true
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+											},
+											"response": []
+										},
+										{
+											"name": "Отправка на внешн.+прайс Copy",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "30e53c43-2dda-435e-906d-d796ba2384e0",
+														"type": "text/javascript",
+														"exec": [
+															"var favorit = pm.globals.get(\"extern_favorit_id15331\");",
+															"var price = pm.globals.get(\"price_id15331\");",
+															"",
+															"pm.test(\"Есть ответ от внешнего поставщика Фаворит\", function () {",
+															"    var jsonData = pm.response.json();",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == favorit) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+															"    var jsonData = pm.response.json();",
+															"   ",
+															"        var exist = false;",
+															"        for (var i = 0; i < jsonData.length; i++) {",
+															"            var item = jsonData[i];",
+															"            if (item.distributorId == price) {",
+															"                exist = true;",
+															"                break;",
+															"            }",
+															"        }",
+															"        pm.expect(exist).to.be.true;",
+															"}); ",
+															"",
+															"",
+															"",
+															"pm.test(\"Ответ содержит 2 осн. артикула и три аналога\", function () {",
+															"    var jsonData = pm.response.json();",
+															"    var responsHas5Objects = jsonData.length;",
+															"    pm.expect(responsHas5Objects).to.eql(5);",
+															"});"
+														]
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"body": {},
+												"url": {
+													"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE",
+													"host": [
+														"{{id15331}}"
+													],
+													"path": [
+														"search",
+														"articles",
+														""
+													],
+													"query": [
+														{
+															"key": "userlogin",
+															"value": "evreev@noda.pro"
+														},
+														{
+															"key": "userpsw",
+															"value": "81dc9bdb52d04dc20036dbd8313ed055"
+														},
+														{
+															"key": "number",
+															"value": "CAM711"
+														},
+														{
+															"key": "brand",
+															"value": "AE"
+														},
+														{
+															"key": "useOnlineStocks",
+															"value": "true",
+															"disabled": true
+														}
+													]
+												},
+												"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "4d9728c0-fa94-4631-89ad-321ce64c6c6b",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "976c2c51-6a54-460c-83b6-7794fb5be8eb",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "cd413ef1-2ef4-42bd-b2c1-7d68885d0889",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "471cc9a5-5285-4b45-8a3b-fe67e2b2baee",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "include UEOS",
+							"description": "Параметр useExternalOnlineStocks (useExternalOnlineStocks) включен в запросы",
+							"item": [
+								{
+									"name": "admin id15331",
+									"description": "",
+									"item": [
+										{
+											"name": "true",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "97518931-4228-4f82-a4f0-663c7f9fe0fb",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ только 1 предложение от прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE&useOnlineStocks=0",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0"
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true",
+																	"disabled": true
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "d1fdffe7-9ecc-431c-883a-4fae119eb40e",
+																"type": "text/javascript",
+																"exec": [
+																	"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+																	"    pm.response.to.have.status(404);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0",
+																	"disabled": true
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										},
+										{
+											"name": "false",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс UEOS false",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "e4bd3f99-9a4a-4b01-b28c-b4fdc5dbb75c",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит только 1 предложение: из прайса\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711&brand=AE&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0",
+																	"disabled": true
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика UEOS true",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "41057d6b-152d-436d-ba49-4ec331562367",
+																"type": "text/javascript",
+																"exec": [
+																	"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+																	"    pm.response.to.have.status(404);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=api@id15331&userpsw=b3377ab9bcb6bb3abe1f7f07b23aa85e&number=CAM711TEST&brand=AE&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "api@id15331"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "b3377ab9bcb6bb3abe1f7f07b23aa85e"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0",
+																	"disabled": true
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										}
+									],
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "client 4660550",
+									"description": "Опция api/allow_send_request_online_distributors включена",
+									"item": [
+										{
+											"name": "true",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "f830f816-2b9a-4276-a0af-f76d0031fca2",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Есть ответ от Прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ только 1 предложение от прайсового поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0",
+																	"disabled": true
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул, от фаворита 1 основной артикул, 3 артикула аналога"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "5fb9fcb4-d489-4c02-ac9d-8d966299dbc6",
+																"type": "text/javascript",
+																"exec": [
+																	"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+																	"    pm.response.to.have.status(404);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE&useExternalOnlineStocks=true",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0",
+																	"disabled": true
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "true"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										},
+										{
+											"name": "false",
+											"description": "",
+											"item": [
+												{
+													"name": "Отправка на внешн.+прайс UEOS false",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "444f049b-bcbf-4fb8-9089-9d1b4dde24b9",
+																"type": "text/javascript",
+																"exec": [
+																	"var price = pm.globals.get(\"price_id15331\");",
+																	"",
+																	"pm.test(\"Есть ответ от внутреннего поставщика поставщика\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"   ",
+																	"        var exist = false;",
+																	"        for (var i = 0; i < jsonData.length; i++) {",
+																	"            var item = jsonData[i];",
+																	"            if (item.distributorId == price) {",
+																	"                exist = true;",
+																	"                break;",
+																	"            }",
+																	"        }",
+																	"        pm.expect(exist).to.be.true;",
+																	"}); ",
+																	"",
+																	"",
+																	"",
+																	"pm.test(\"Ответ содержит 1 артикул\", function () {",
+																	"    var jsonData = pm.response.json();",
+																	"    var responsHas5Objects = jsonData.length;",
+																	"    pm.expect(responsHas5Objects).to.eql(1);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711&brand=AE&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0",
+																	"disabled": true
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers\n\nОжидаю ответ от прайсового поставщика - 1 артикул"
+													},
+													"response": []
+												},
+												{
+													"name": "Отправка на внутр. онлайн поставщика UEOS true",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "4815e294-f67d-4adf-a295-97dd779f6327",
+																"type": "text/javascript",
+																"exec": [
+																	"pm.test(\"Предложений не найдено, онлайн поставщик заблокирован, код 404\", function () {",
+																	"    pm.response.to.have.status(404);",
+																	"});"
+																]
+															}
+														}
+													],
+													"request": {
+														"method": "GET",
+														"header": [],
+														"body": {},
+														"url": {
+															"raw": "{{id15331}}/search/articles/?userlogin=evreev@noda.pro&userpsw=81dc9bdb52d04dc20036dbd8313ed055&number=CAM711TEST&brand=AE&useExternalOnlineStocks=false",
+															"host": [
+																"{{id15331}}"
+															],
+															"path": [
+																"search",
+																"articles",
+																""
+															],
+															"query": [
+																{
+																	"key": "userlogin",
+																	"value": "evreev@noda.pro"
+																},
+																{
+																	"key": "userpsw",
+																	"value": "81dc9bdb52d04dc20036dbd8313ed055"
+																},
+																{
+																	"key": "number",
+																	"value": "CAM711TEST"
+																},
+																{
+																	"key": "brand",
+																	"value": "AE"
+																},
+																{
+																	"key": "useOnlineStocks",
+																	"value": "0",
+																	"disabled": true
+																},
+																{
+																	"key": "useExternalOnlineStocks",
+																	"value": "false"
+																}
+															]
+														},
+														"description": "реселлер R1 с подкл. внешним поставщиком, прайсом и abcp онлайн поставщиком \nhttp://root.abcp.ru/?search=15331&page=customers"
+													},
+													"response": []
+												}
+											],
+											"_postman_isSubFolder": true
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "47d49e25-0ab6-42d5-8019-bb9f8c8f3d03",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a0697431-1452-4566-a576-38568e93457f",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"_postman_isSubFolder": true
+								}
+							],
+							"_postman_isSubFolder": true
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "59227260-e765-4c51-ac65-4acdf68b85ff",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "628df747-cb3b-4745-9caf-2cfb9a738b0b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "api-tests",
+  "version": "1.0.0",
+  "description": "Garage api Go test",
+  "derictories": {
+    "test": "Tests",
+    "environment": "Env"
+  },
+  "scripts": {
+    "test": "newman run Tests/Garage-Api.postman_collection.json -e Env/Prod.postman_environment.json -g Env/Garage-Api-Go.postman_globals.json"
+  },
+  "author": "Sergey Korban",
+  "dependencies": {
+    "newman": "^3.9.4"
+  }
+}
