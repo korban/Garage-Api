@@ -11,7 +11,7 @@
     "url": "https://github.com/korban/Garage-Api.git"
   },
   "scripts": {
-    "test": "newman run "https://api.getpostman.com/collections/855656-2a2b7565-f86e-4fa6-84e5-eb09605dec8d?apikey=d66027b2420a40d8a162b0621a15d51c" -e "https://api.getpostman.com/environments?apikey=d66027b2420a40d8a162b0621a15d51c" -g Env/Garage-Api-Go.postman_globals.json"
+    "test": "newman run "https://api.getpostman.com/collections/855656-2a2b7565-f86e-4fa6-84e5-eb09605dec8d?apikey=d66027b2420a40d8a162b0621a15d51c" \ -e "https://api.getpostman.com/environments?apikey=d66027b2420a40d8a162b0621a15d51c" -g Env/Garage-Api-Go.postman_globals.json"
   },
   "author": "Sergey Korban",
   "dependencies": {
