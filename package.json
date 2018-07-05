@@ -7,7 +7,7 @@
     "environment": "Env"
   },
   "scripts": {
-    "test": "newman run Garage-Api/Tests/Garage-Api.postman_collection.json -e Garage-ApiEnv/Prod.postman_environment.json -g Env/Garage-Api-Go.postman_globals.json"
+    "test": "newman run Garage-Api/Tests/Garage-Api.postman_collection.json -e Garage-Api/Env/Prod.postman_environment.json -g Garage-Api/Env/Garage-Api-Go.postman_globals.json"
   },
   "author": "Sergey Korban",
   "dependencies": {
