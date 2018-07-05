@@ -1,11 +1,20 @@
 {
-  "name": "garage-api",
+  "name": "api-tests",
   "version": "1.0.0",
-  "description": "Go Garage api tests",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "Garage api Go test",
+  "derictories": {
+    "test": "Tests",
+    "environment": "Env"
   },
-  "author": "Sergey korban",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/korban/Garage-Api.git"
+  },
+  "scripts": {
+    "test": "newman run Tests/Garage-Api.postman_collection.json -e Env/Prod.postman_environment.json -g Env/Garage-Api-Go.postman_globals.json"
+  },
+  "author": "Sergey Korban",
+  "dependencies": {
+    "newman": "^3.9.4"
+  }
 }
